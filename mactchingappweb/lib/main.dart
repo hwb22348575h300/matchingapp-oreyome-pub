@@ -14,7 +14,6 @@ import 'package:matchingappweb/screens/profiles_screen.dart';
 import 'package:matchingappweb/screens/signup_screen.dart';
 import 'package:provider/provider.dart';
 
-
 Future<void> main() async {
   await dotenv.load(fileName: ".env.dev");
   runApp(
@@ -28,7 +27,7 @@ Future<void> main() async {
   );
 }
 
-class MyApp extends StatelessWidget  {
+class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
