@@ -7,7 +7,6 @@ import 'package:path_provider/path_provider.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import '../models/user_model.dart';
 
-
 class LoginProvider with ChangeNotifier {
   bool _isSuccess = false;
   String message = '';
@@ -45,25 +44,26 @@ class LoginProvider with ChangeNotifier {
     try {
       Dio dio = Dio();
       dio.options.baseUrl = _uriHost.toString();
-      dio.options.connectTimeout = 5000;
-      dio.options.receiveTimeout = 3000;
+      dio.options.connectTimeout = Duration(milliseconds: 5000);
+      dio.options.receiveTimeout = Duration(milliseconds: 3000);
       dio.options.contentType = 'application/json';
 
       List<Cookie> cookieList = [];
 
       Directory appDocDir = await getApplicationDocumentsDirectory();
       String appDocPath = appDocDir.path;
-      PersistCookieJar cookieJar = PersistCookieJar(storage: FileStorage(appDocPath+"/.cookies/"));
+      PersistCookieJar cookieJar =
+          PersistCookieJar(storage: FileStorage(appDocPath + "/.cookies/"));
       dio.interceptors.add(CookieManager(cookieJar));
 
-      final responseJwt = await dio.post(
-          '/authen/jwt/create',
-          data: {
-            'email': email,
-            'password': password,
-          }
-      );
-      cookieList = [ ...cookieList, Cookie('access_token', responseJwt.data['access']) ];
+      final responseJwt = await dio.post('/authen/jwt/create', data: {
+        'email': email,
+        'password': password,
+      });
+      cookieList = [
+        ...cookieList,
+        Cookie('access_token', responseJwt.data['access'])
+      ];
       await cookieJar.saveFromResponse(_uriHost, cookieList);
 
       final responseUser = await dio.get(
@@ -78,7 +78,7 @@ class LoginProvider with ChangeNotifier {
       _userModel.email = responseUser.data['email'];
 
       _isSuccess = true;
-    } catch(error) {
+    } catch (error) {
       message = '正しいEメールとパスワードを入力してください';
       print(error);
       _isSuccess = false;
@@ -90,7 +90,8 @@ class LoginProvider with ChangeNotifier {
   Future<void> logout() async {
     Directory appDocDir = await getApplicationDocumentsDirectory();
     String appDocPath = appDocDir.path;
-    PersistCookieJar cookieJar = PersistCookieJar(storage: FileStorage(appDocPath+"/.cookies/"));
+    PersistCookieJar cookieJar =
+        PersistCookieJar(storage: FileStorage(appDocPath + "/.cookies/"));
     await cookieJar.delete(_uriHost);
     notifyListeners();
   }
@@ -104,18 +105,15 @@ class LoginProvider with ChangeNotifier {
       dio.options.baseUrl = _uriHost.toString();
       dio.options.contentType = 'application/json';
 
-      final response = await dio.post(
-          '/api/users/create/',
-          data: {
-            'email': email,
-            'password': password,
-            'username': '',
-          }
-      );
+      final response = await dio.post('/api/users/create/', data: {
+        'email': email,
+        'password': password,
+        'username': '',
+      });
       _userModel.id = response.data['id'];
       message = '新規ユーザーの仮登録が成功しました。本登録にはユーザーのアクティベーションを行って下さい';
       _isSuccess = true;
-    } catch(error) {
+    } catch (error) {
       message = '新規ユーザー登録処理が失敗しました。同じEmailは使用できません';
       print(error);
       _isSuccess = false;
@@ -123,6 +121,4 @@ class LoginProvider with ChangeNotifier {
     notifyListeners();
     return _isSuccess;
   }
-
 }
-

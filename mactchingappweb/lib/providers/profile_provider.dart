@@ -19,27 +19,27 @@ class ProfileProvider with ChangeNotifier {
 
   /// プロフィール機能
   ProfileModel myProfile = ProfileModel(
-      user: null,
-      isSpecial: false,
-      isKyc: false,
-      nickname: '',
-      topImage: null,
-      createdAt: null,
-      updatedAt: null,
-      age: 0,
-      sex: '',
-      height: null,
-      location: null,
-      work: null,
-      revenue: 0,
-      graduation: null,
-      hobby: null,
-      passion: null,
-      tweet: null,
-      introduction: null,
-      sendFavorite: null,
-      receiveFavorite: null,
-      stockFavorite: null,
+    user: null,
+    isSpecial: false,
+    isKyc: false,
+    nickname: '',
+    topImage: null,
+    createdAt: null,
+    updatedAt: null,
+    age: 0,
+    sex: '',
+    height: null,
+    location: null,
+    work: null,
+    revenue: 0,
+    graduation: null,
+    hobby: null,
+    passion: null,
+    tweet: null,
+    introduction: null,
+    sendFavorite: null,
+    receiveFavorite: null,
+    stockFavorite: null,
   );
   List<ProfileModel> profileList = [];
   List<ProfileModel> profileApproachingList = [];
@@ -62,7 +62,6 @@ class ProfileProvider with ChangeNotifier {
   List<MessageModel> _receiveMessageList = [];
   String newMessage = '';
 
-
   /// 自己プロフィール取得
   Future fetchMyProfile(String userId) async {
     _isSuccess = false;
@@ -79,7 +78,7 @@ class ProfileProvider with ChangeNotifier {
       );
       myProfile = _inputProfileModel(profile.data!);
       _isSuccess = true;
-    } catch(error) {
+    } catch (error) {
       print(error);
       _isSuccess = false;
     }
@@ -92,7 +91,8 @@ class ProfileProvider with ChangeNotifier {
     _isSuccess = false;
     final ImagePicker _picker = ImagePicker();
     try {
-      final XFile? image = await _picker.pickImage(source: ImageSource.gallery, imageQuality: 25);
+      final XFile? image = await _picker.pickImage(
+          source: ImageSource.gallery, imageQuality: 25);
 
       if (image != null) {
         final _imageDecode = decodeImage(File(image.path).readAsBytesSync());
@@ -101,19 +101,19 @@ class ProfileProvider with ChangeNotifier {
           const int _imageLongSide = 720;
           if (_imageDecode.width > _imageDecode.height) {
             if (_imageDecode.width > _imageLongSide) {
-              _imageResize = copyResize(
-                  _imageDecode,
+              _imageResize = copyResize(_imageDecode,
                   width: _imageLongSide,
-                  height: _imageLongSide * _imageDecode.height ~/ _imageDecode.width
-              );
+                  height: _imageLongSide *
+                      _imageDecode.height ~/
+                      _imageDecode.width);
             }
           } else {
             if (_imageDecode.height > _imageLongSide) {
-              _imageResize = copyResize(
-                  _imageDecode,
-                  width: _imageLongSide * _imageDecode.width ~/ _imageDecode.height,
-                  height: _imageLongSide
-              );
+              _imageResize = copyResize(_imageDecode,
+                  width: _imageLongSide *
+                      _imageDecode.width ~/
+                      _imageDecode.height,
+                  height: _imageLongSide);
             }
           }
           if (_imageResize != null) {
@@ -141,12 +141,12 @@ class ProfileProvider with ChangeNotifier {
       FormData formData = FormData.fromMap({
         "is_special": false,
         "is_kyc": false,
-        "top_image": uploadTopImage != null ?
-          await MultipartFile.fromFile(
-            uploadTopImage!.path,
-            filename: uploadTopImage!.path.split('/').last,
-          ) :
-          myProfile.topImage,
+        "top_image": uploadTopImage != null
+            ? await MultipartFile.fromFile(
+                uploadTopImage!.path,
+                filename: uploadTopImage!.path.split('/').last,
+              )
+            : myProfile.topImage,
         "nickname": myProfile.nickname,
         "age": myProfile.age,
         "sex": myProfile.sex,
@@ -175,7 +175,7 @@ class ProfileProvider with ChangeNotifier {
       );
       myProfile = _inputProfileModel(profile.data!);
       _isSuccess = true;
-    } catch(error) {
+    } catch (error) {
       print(error);
       _isSuccess = false;
     }
@@ -191,12 +191,12 @@ class ProfileProvider with ChangeNotifier {
       List<Cookie> cookieList = await _prepareDio(dio);
 
       FormData formData = FormData.fromMap({
-        "top_image": uploadTopImage != null ?
-          await MultipartFile.fromFile(
-            uploadTopImage!.path,
-            filename: uploadTopImage!.path.split('/').last,
-          ) :
-          myProfile.topImage,
+        "top_image": uploadTopImage != null
+            ? await MultipartFile.fromFile(
+                uploadTopImage!.path,
+                filename: uploadTopImage!.path.split('/').last,
+              )
+            : myProfile.topImage,
         "nickname": myProfile.nickname,
         "height": myProfile.height,
         "location": myProfile.location,
@@ -210,17 +210,17 @@ class ProfileProvider with ChangeNotifier {
       });
 
       final Response profile = await dio.patch(
-          '/api/users/profile/$userId/',
-          options: Options(
-            headers: {
-              'Authorization': 'JWT ${cookieList.first.value}',
-            },
-          ),
-          data: formData,
+        '/api/users/profile/$userId/',
+        options: Options(
+          headers: {
+            'Authorization': 'JWT ${cookieList.first.value}',
+          },
+        ),
+        data: formData,
       );
       myProfile = _inputProfileModel(profile.data!);
       _isSuccess = true;
-    } catch(error) {
+    } catch (error) {
       print(error);
       _isSuccess = false;
     }
@@ -233,8 +233,10 @@ class ProfileProvider with ChangeNotifier {
     _isSuccess = false;
     _isSuccess = await _fetchProfileAllList();
     _isSuccess = await _fetchMatchingList();
-    profileList.removeWhere((profile) => _approachingUserIdList.contains(profile.user));
-    profileList.removeWhere((profile) => _approachedUserIdList.contains(profile.user));
+    profileList.removeWhere(
+        (profile) => _approachingUserIdList.contains(profile.user));
+    profileList
+        .removeWhere((profile) => _approachedUserIdList.contains(profile.user));
     notifyListeners();
     return _isSuccess;
   }
@@ -244,8 +246,11 @@ class ProfileProvider with ChangeNotifier {
     _isSuccess = false;
     _isSuccess = await _fetchProfileAllList();
     _isSuccess = await _fetchMatchingList();
-    profileApproachingList = profileList.where((profile) => _approachingUserIdList.contains(profile.user)).toList();
-    profileApproachingList.removeWhere((profile) => _matchingUserIdList.contains(profile.user));
+    profileApproachingList = profileList
+        .where((profile) => _approachingUserIdList.contains(profile.user))
+        .toList();
+    profileApproachingList
+        .removeWhere((profile) => _matchingUserIdList.contains(profile.user));
     notifyListeners();
     return _isSuccess;
   }
@@ -255,8 +260,11 @@ class ProfileProvider with ChangeNotifier {
     _isSuccess = false;
     _isSuccess = await _fetchProfileAllList();
     _isSuccess = await _fetchMatchingList();
-    profileApproachedList = profileList.where((profile) => _approachedUserIdList.contains(profile.user)).toList();
-    profileApproachedList.removeWhere((profile) => _matchingUserIdList.contains(profile.user));
+    profileApproachedList = profileList
+        .where((profile) => _approachedUserIdList.contains(profile.user))
+        .toList();
+    profileApproachedList
+        .removeWhere((profile) => _matchingUserIdList.contains(profile.user));
     notifyListeners();
     return _isSuccess;
   }
@@ -266,7 +274,9 @@ class ProfileProvider with ChangeNotifier {
     _isSuccess = false;
     _isSuccess = await _fetchProfileAllList();
     _isSuccess = await _fetchMatchingList();
-    profileMatchingList = profileList.where((profile) => _matchingUserIdList.contains(profile.user)).toList();
+    profileMatchingList = profileList
+        .where((profile) => _matchingUserIdList.contains(profile.user))
+        .toList();
     notifyListeners();
     return _isSuccess;
   }
@@ -301,7 +311,8 @@ class ProfileProvider with ChangeNotifier {
         // いいね新規作成処理
         await _createFavorite(approached: approachUserId, approved: true);
         // いいねをくれたユーザーのマッチングリストの中でapproachUserIdと一致するマッチングデータのIDを探索する
-        Iterable<MatchingModel> approachMatching = _approachedList.where((matching) => matching.approaching == approachUserId);
+        Iterable<MatchingModel> approachMatching = _approachedList
+            .where((matching) => matching.approaching == approachUserId);
         int approachMatchingId = approachMatching.first.id ?? 0;
         // 相手のいいねデータに対する承認処理
         await _patchApproved(id: approachMatchingId);
@@ -316,7 +327,7 @@ class ProfileProvider with ChangeNotifier {
         await fetchProfileApproachingList();
       }
       _isSuccess = true;
-    } catch(error) {
+    } catch (error) {
       print(error);
       _isSuccess = false;
     }
@@ -333,12 +344,15 @@ class ProfileProvider with ChangeNotifier {
       await _fetchSendMessageList();
       await _fetchReceiveMessageList();
       // 指定したユーザーとのメッセージだけをフィルタリングして新規メッセージ順に messageList に格納する
-      messageList.addAll(_sendMessageList.where((message) => message.receiver == profileDetail!.user));
-      messageList.addAll(_receiveMessageList.where((message) => message.sender == profileDetail!.user));
-      messageList.sort((alpha, beta) => alpha.createdAt!.compareTo(beta.createdAt!));
+      messageList.addAll(_sendMessageList
+          .where((message) => message.receiver == profileDetail!.user));
+      messageList.addAll(_receiveMessageList
+          .where((message) => message.sender == profileDetail!.user));
+      messageList
+          .sort((alpha, beta) => alpha.createdAt!.compareTo(beta.createdAt!));
       // 処理成功
       _isSuccess = true;
-    } catch(error) {
+    } catch (error) {
       print(error);
       _isSuccess = false;
     }
@@ -397,7 +411,7 @@ class ProfileProvider with ChangeNotifier {
       newMessage = '';
       await getMessageList();
       _isSuccess = true;
-    } catch(error) {
+    } catch (error) {
       print(error);
       _isSuccess = false;
     }
@@ -422,7 +436,7 @@ class ProfileProvider with ChangeNotifier {
       );
       profileList = _inputProfileModelList(profiles.data!);
       _isSuccess = true;
-    } catch(error) {
+    } catch (error) {
       print(error);
       _isSuccess = false;
     }
@@ -445,14 +459,22 @@ class ProfileProvider with ChangeNotifier {
         ),
       );
       _matchingList = _inputMatchingModelList(matchingList.data!);
-      _approachingList = _matchingList.where((matching) => matching.approaching == myProfile.user).toList();
-      _approachingUserIdList = _approachingList.map((matching) => matching.approached).toList();
-      _approachedList = _matchingList.where((matching) => matching.approached == myProfile.user).toList();
-      _approachedUserIdList = _approachedList.map((matching) => matching.approaching!).toList();
-      _matchingList = _matchingList.where((matching) => matching.approved == true).toList();
-      _matchingUserIdList = _matchingList.map((matching) => matching.approaching!).toList();
+      _approachingList = _matchingList
+          .where((matching) => matching.approaching == myProfile.user)
+          .toList();
+      _approachingUserIdList =
+          _approachingList.map((matching) => matching.approached).toList();
+      _approachedList = _matchingList
+          .where((matching) => matching.approached == myProfile.user)
+          .toList();
+      _approachedUserIdList =
+          _approachedList.map((matching) => matching.approaching!).toList();
+      _matchingList =
+          _matchingList.where((matching) => matching.approved == true).toList();
+      _matchingUserIdList =
+          _matchingList.map((matching) => matching.approaching!).toList();
       _isSuccess = true;
-    } catch(error) {
+    } catch (error) {
       print(error);
       _isSuccess = false;
     }
@@ -461,7 +483,8 @@ class ProfileProvider with ChangeNotifier {
   }
 
   /// 【プライベート】マッチングデータ新規作成
-  Future _createFavorite({required String approached, required bool approved}) async {
+  Future _createFavorite(
+      {required String approached, required bool approved}) async {
     Dio dio = Dio();
     List<Cookie> cookieList = await _prepareDio(dio);
     return await dio.post(
@@ -489,9 +512,7 @@ class ProfileProvider with ChangeNotifier {
           'Authorization': 'JWT ${cookieList.first.value}',
         },
       ),
-      data: {
-        "approved": true
-      },
+      data: {"approved": true},
     );
   }
 
@@ -525,9 +546,9 @@ class ProfileProvider with ChangeNotifier {
 
   /// 【プライベート】バックエンドから取得したプロフィールデータ一覧のProvider化
   List<ProfileModel> _inputProfileModelList(dynamic profiles) {
-    return profiles.map<ProfileModel>(
-      (profile) => _inputProfileModel(profile)
-    ).toList();
+    return profiles
+        .map<ProfileModel>((profile) => _inputProfileModel(profile))
+        .toList();
   }
 
   /// 【プライベート】バックエンドから取得したマッチングデータのProvider化
@@ -543,9 +564,9 @@ class ProfileProvider with ChangeNotifier {
 
   /// 【プライベート】バックエンドから取得したマッチングデータ一覧のProvider化
   List<MatchingModel> _inputMatchingModelList(dynamic matchingList) {
-    return matchingList.map<MatchingModel>(
-      (matching) => _inputMatchingModel(matching)
-    ).toList();
+    return matchingList
+        .map<MatchingModel>((matching) => _inputMatchingModel(matching))
+        .toList();
   }
 
   /// 【プライベート】バックエンドから取得したメッセージデータのProvider化
@@ -561,23 +582,23 @@ class ProfileProvider with ChangeNotifier {
 
   /// 【プライベート】バックエンドから取得したメッセージデータ一覧のProvider化
   List<MessageModel> _inputMessageModelList(dynamic messageList) {
-    return messageList.map<MessageModel>(
-            (message) => _inputMessageModel(message)
-    ).toList();
+    return messageList
+        .map<MessageModel>((message) => _inputMessageModel(message))
+        .toList();
   }
 
   /// 【プライベート】HTTPクライアントの実行準備
   Future<List<Cookie>> _prepareDio(Dio dio) async {
     dio.options.baseUrl = _uriHost.toString();
-    dio.options.connectTimeout = 5000;
-    dio.options.receiveTimeout = 3000;
+    dio.options.connectTimeout = Duration(milliseconds: 5000);
+    dio.options.receiveTimeout = Duration(milliseconds: 3000);
     // dio.options.contentType = 'application/json' or 'multipart/form-data';
     Directory appDocDir = await getApplicationDocumentsDirectory();
     String appDocPath = appDocDir.path;
-    PersistCookieJar cookieJar = PersistCookieJar(storage: FileStorage(appDocPath+"/.cookies/"));
+    PersistCookieJar cookieJar =
+        PersistCookieJar(storage: FileStorage(appDocPath + "/.cookies/"));
     dio.interceptors.add(CookieManager(cookieJar));
     List<Cookie> cookieList = await cookieJar.loadForRequest(_uriHost);
     return cookieList;
   }
-
 }

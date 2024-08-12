@@ -39,9 +39,9 @@
     },
     {
       "name": "cookie_jar",
-      "rootUri": "file:///C:/Users/mareg/AppData/Local/Pub/Cache/hosted/pub.dev/cookie_jar-3.0.1",
+      "rootUri": "file:///C:/Users/mareg/AppData/Local/Pub/Cache/hosted/pub.dev/cookie_jar-4.0.8",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.15"
     },
     {
       "name": "cross_file",
@@ -63,19 +63,25 @@
     },
     {
       "name": "dio",
-      "rootUri": "file:///C:/Users/mareg/AppData/Local/Pub/Cache/hosted/pub.dev/dio-4.0.6",
+      "rootUri": "file:///C:/Users/mareg/AppData/Local/Pub/Cache/hosted/pub.dev/dio-5.5.0+1",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.18"
     },
     {
       "name": "dio_cookie_manager",
-      "rootUri": "file:///C:/Users/mareg/AppData/Local/Pub/Cache/hosted/pub.dev/dio_cookie_manager-2.0.0",
+      "rootUri": "file:///C:/Users/mareg/AppData/Local/Pub/Cache/hosted/pub.dev/dio_cookie_manager-3.1.1",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.15"
+    },
+    {
+      "name": "dio_web_adapter",
+      "rootUri": "file:///C:/Users/mareg/AppData/Local/Pub/Cache/hosted/pub.dev/dio_web_adapter-1.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
     },
     {
       "name": "email_validator",
-      "rootUri": "file:///C:/Users/mareg/AppData/Local/Pub/Cache/hosted/pub.dev/email_validator-2.1.17",
+      "rootUri": "file:///C:/Users/mareg/AppData/Local/Pub/Cache/hosted/pub.dev/email_validator-3.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -129,9 +135,9 @@
     },
     {
       "name": "flutter_lints",
-      "rootUri": "file:///C:/Users/mareg/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_lints-1.0.4",
+      "rootUri": "file:///C:/Users/mareg/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_lints-4.0.0",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "3.1"
     },
     {
       "name": "flutter_plugin_android_lifecycle",
@@ -153,9 +159,9 @@
     },
     {
       "name": "http",
-      "rootUri": "file:///C:/Users/mareg/AppData/Local/Pub/Cache/hosted/pub.dev/http-0.13.6",
+      "rootUri": "file:///C:/Users/mareg/AppData/Local/Pub/Cache/hosted/pub.dev/http-1.2.2",
       "packageUri": "lib/",
-      "languageVersion": "2.19"
+      "languageVersion": "3.3"
     },
     {
       "name": "http_parser",
@@ -165,27 +171,27 @@
     },
     {
       "name": "image",
-      "rootUri": "file:///C:/Users/mareg/AppData/Local/Pub/Cache/hosted/pub.dev/image-3.3.0",
+      "rootUri": "file:///C:/Users/mareg/AppData/Local/Pub/Cache/hosted/pub.dev/image-4.2.0",
       "packageUri": "lib/",
       "languageVersion": "2.15"
     },
     {
       "name": "image_picker",
-      "rootUri": "file:///C:/Users/mareg/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker-0.8.9",
+      "rootUri": "file:///C:/Users/mareg/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker-1.1.2",
       "packageUri": "lib/",
-      "languageVersion": "2.18"
+      "languageVersion": "3.3"
     },
     {
       "name": "image_picker_android",
-      "rootUri": "file:///C:/Users/mareg/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker_android-0.8.12+10",
+      "rootUri": "file:///C:/Users/mareg/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker_android-0.8.12+11",
       "packageUri": "lib/",
       "languageVersion": "3.4"
     },
     {
       "name": "image_picker_for_web",
-      "rootUri": "file:///C:/Users/mareg/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker_for_web-2.2.0",
+      "rootUri": "file:///C:/Users/mareg/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker_for_web-3.0.5",
       "packageUri": "lib/",
-      "languageVersion": "2.18"
+      "languageVersion": "3.3"
     },
     {
       "name": "image_picker_ios",
@@ -237,9 +243,9 @@
     },
     {
       "name": "lints",
-      "rootUri": "file:///C:/Users/mareg/AppData/Local/Pub/Cache/hosted/pub.dev/lints-1.0.1",
+      "rootUri": "file:///C:/Users/mareg/AppData/Local/Pub/Cache/hosted/pub.dev/lints-4.0.0",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "3.1"
     },
     {
       "name": "matcher",
@@ -386,6 +392,12 @@
       "languageVersion": "2.17"
     },
     {
+      "name": "universal_io",
+      "rootUri": "file:///C:/Users/mareg/AppData/Local/Pub/Cache/hosted/pub.dev/universal_io-2.2.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
       "name": "vector_math",
       "rootUri": "file:///C:/Users/mareg/AppData/Local/Pub/Cache/hosted/pub.dev/vector_math-2.1.4",
       "packageUri": "lib/",
@@ -422,7 +434,7 @@
       "languageVersion": "2.16"
     }
   ],
-  "generated": "2024-08-12T01:04:13.570818Z",
+  "generated": "2024-08-12T01:53:35.521810Z",
   "generator": "pub",
   "generatorVersion": "3.4.4",
   "flutterRoot": "file:///D:/Program%20Files/Flutter/flutter",
